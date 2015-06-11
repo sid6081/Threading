@@ -1,0 +1,66 @@
+import java.util.*;
+
+class Func implements Runnable
+{
+	Thread threadObject;
+	int numOfThreads,arrayLength;
+	int arrayNum[]=new int[20];
+	static int threadCount=0;
+	
+	/**
+	 * @param x  Number of threads (except Main thread)
+	 * @param arrayElements  Array containing elements
+	 */
+	Func(int x,int arrayElements[])
+	{
+		threadObject=new Thread(this,"New_Thread_"+(threadCount++));
+		System.out.println(threadObject);
+		numOfThreads=x;
+		arrayLength=arrayElements.length;
+		arrayNum=arrayElements;
+		threadObject.start();
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Runnable#run()
+	 *
+	 *  Calculates sum of elements belonging to arrayNum specific thread
+	 */
+	public void run()
+	{
+		int z=arrayLength/numOfThreads;
+		int sum=0;
+		for(int i=(threadObject.getName().charAt(11)-48)*z;i<(threadObject.getName().charAt(11)-47)*z;i++)
+		{
+			try{
+				//System.out.println(threadObject.getName()+"   "+arrayNum[i]);
+				sum=sum+arrayNum[i];
+				System.out.println(threadObject.getName()+"   "+Thread_runnable.arrayElements[i]+"     SUM : "+sum);
+				Thread.sleep(1000);
+			}catch(InterruptedException e)
+			{
+				System.out.println("Exception : "+e);
+			}
+		}
+	}
+}
+
+public class Thread_runnable
+{
+	static int arrayElements[];
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		int i,numElements,numThreads=0;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("Enter the no. of elements : ");
+		numElements=sc.nextInt();
+		arrayElements=new int[numElements];
+		System.out.println("Enter "+numElements+" elements");
+		for(i=0;i<numElements;i++)
+			arrayElements[i]=sc.nextInt();
+		System.out.println("Enter the no. of threads ? ");
+		numThreads=sc.nextInt();
+		for(i=0;i<numThreads;i++)
+			new Func(numThreads,arrayElements);
+	}
+}
