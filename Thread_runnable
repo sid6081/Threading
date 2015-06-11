@@ -58,7 +58,7 @@ public class Thread_runnable
 		System.out.println("Enter "+numElements+" elements");
 		for(i=0;i<numElements;i++)
 			arrayElements[i]=sc.nextInt();
-		System.out.println("Enter the no. of threads ? ");
+		System.out.println("Enter the no. of threads ? (This number should divide number of array elements)");
 		numThreads=sc.nextInt();
 		for(i=0;i<numThreads;i++)
 			new Func(numThreads,arrayElements);
