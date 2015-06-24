@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Func implements Runnable
+class ThreadRunnable implements Runnable
 {
 	Thread threadObject;
 	int numOfThreads,arrayLength;
@@ -57,10 +57,14 @@ public class Thread_runnable
 		arrayElements=new int[numElements];
 		System.out.println("Enter "+numElements+" elements");
 		for(i=0;i<numElements;i++)
+		{
 			arrayElements[i]=sc.nextInt();
+		}
 		System.out.println("Enter the no. of threads ? (This number should divide number of array elements)");
 		numThreads=sc.nextInt();
 		for(i=0;i<numThreads;i++)
+		{
 			new Func(numThreads,arrayElements);
+		}
 	}
 }
